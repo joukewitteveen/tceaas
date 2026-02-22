@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -eu
+
+load() {
+    mount "$1" "$RUNTIME_DIRECTORY" -t squashfs -o loop,ro
+    cp -ans "$RUNTIME_DIRECTORY"/* /
+}
+
+unload() {
+    find "$RUNTIME_DIRECTORY" -depth -exec "$0" _unlink '{}' +
+    umount "$RUNTIME_DIRECTORY"
+}
+
+_unlink() {
+    for member
+    do
+        [[ "$(readlink "${member#$RUNTIME_DIRECTORY}")" != "$member" ]] || \
+          unlink "${member#$RUNTIME_DIRECTORY}"
+    done
+}
+
+"$@"
