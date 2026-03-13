@@ -18,13 +18,15 @@ are made for automatic fetching of packages.
 ## Loading & unloading
 
 Loading an extension that provides an application of interest, say
-`APP.tcz`, is done as follows.
+`APP.tcz`, can be done using `tce-load APP.tcz`. This is a shorthand
+for the following.
 ```sh
 systemctl start \
   "$(systemd-escape --template=tceaas@.service --path "/PATH/TO/APP.tcz")"
 ```
 
-Unloading is done similarly, but using `stop` instead of `start`.
+Unloading is done similarly using `tce-unload`, or by using `stop`
+instead of `start` in the expanded command above.
 
 Dependency resolution is not possible automatically, but can be achieved
 through drop-in configurations for specialized systemd units using

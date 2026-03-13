@@ -1,0 +1,6 @@
+#!/bin/sh
+
+systemctl stop $(for tce
+  do
+      systemd-escape --template=tceaas@.service --path "$(realpath "$tce")"
+  done)
