@@ -5,6 +5,12 @@ bindir := ${prefix}/bin
 libdir := ${prefix}/lib
 systemunitdir != ${PKG_CONFIG} systemd --variable=systemdsystemunitdir
 
+.PHONY: clean
+clean:
+	@echo "Nothing to do."
+	@echo "To install:"
+	@echo "    make [DESTDIR=\"/path/to/staging\"] install"
+
 .PHONY: install
 install:
 	mkdir -p '${DESTDIR}${systemunitdir}'
