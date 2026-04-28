@@ -4,7 +4,7 @@ set -eu
 
 load() {
     mount "$1" "$RUNTIME_DIRECTORY" -t squashfs -o loop,ro
-    cp -ans "$RUNTIME_DIRECTORY"/* /
+    yes n | cp -ais "$RUNTIME_DIRECTORY"/* / 2>/dev/null
 }
 
 unload() {
